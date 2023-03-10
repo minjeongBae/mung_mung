@@ -3,26 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.gomin.mungmung.ui.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
+        android:id="@+id/homeFragment"
+        android:name="com.gomin.mungmung.ui.HomeFragment"
+        android:label="HomeFragment" />
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.gomin.mungmung.ui.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        android:id="@+id/loginFragment"
+        android:name="com.gomin.mungmung.ui.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/newPwFragment"
+        android:name="com.gomin.mungmung.ui.NewPwFragment"
+        android:label="NewPwFragment" />
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.gomin.mungmung.ui.PhotoFragment"
+        android:label="PhotoFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.gomin.mungmung.ui.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.gomin.mungmung.ui.SearchFragment"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.gomin.mungmung.ui.SettingFragment"
+        android:label="SettingFragment" />
+    <fragment
+        android:id="@+id/changePwFragment"
+        android:name="com.gomin.mungmung.ui.ChangePwFragment"
+        android:label="fragment_change_pw"
+        tools:layout="@layout/fragment_change_pw" />
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.gomin.mungmung.ui.SignupFragment"
+        android:label="SignupFragment" />
 </navigation>

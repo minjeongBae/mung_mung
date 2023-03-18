@@ -23,17 +23,42 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
 
+        navController.navigate(R.id.loginFragment)
 
-        // 로그인, 앱설정, 회원가입에서는 바텀네비게이션 안 보이게
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if(destination.id == R.id.loginFragment || destination.id == R.id.settingFragment
-                || destination.id == R.id.signupFragment ){
-                navView.visibility = View.GONE
+        navView.setOnItemSelectedListener { item->
+            when(item.itemId){
+                R.id.homeFragment->{
+                    navController.navigate(R.id.homeFragment)
+                    true
+                }
+                R.id.searchFragment->{
+                    navController.navigate(R.id.searchFragment)
+                    true
+                }
+                R.id.photoFragment->{
+                    navController.navigate(R.id.photoFragment)
+                    true
+                }
+                R.id.profileFragment->{
+                    navController.navigate(R.id.profileFragment)
+                    true
+                }
+                else -> {false}
             }
-            else{
-                navView.visibility = View.VISIBLE
-            }
+
         }
+
+
+//        // 로그인, 앱설정, 회원가입에서는 바텀네비게이션 안 보이게
+//        navController.addOnDestinationChangedListener { _, destination, _ ->
+//            if(destination.id == R.id.loginFragment || destination.id == R.id.settingFragment
+//                || destination.id == R.id.signupFragment ){
+//                navView.visibility = View.GONE
+//            }
+//            else{
+//                navView.visibility = View.VISIBLE
+//            }
+//        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

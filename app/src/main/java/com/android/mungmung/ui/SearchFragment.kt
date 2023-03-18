@@ -1,31 +1,28 @@
-package com.gomin.mungmung.ui
+package com.android.mungmung.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
-import com.gomin.mungmung.databinding.FragmentNewPwBinding
+import com.android.mungmung.databinding.FragmentSearchBinding
 
-class NewPwFragment : Fragment() {
-
-    private var _binding: FragmentNewPwBinding? = null
+class SearchFragment : Fragment() {
+    private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNewPwBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
+        _binding = FragmentSearchBinding.inflate(inflater,container,false)
+        return binding.root
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

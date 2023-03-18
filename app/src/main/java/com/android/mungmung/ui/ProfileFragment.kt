@@ -1,4 +1,4 @@
-package com.gomin.mungmung.ui
+package com.android.mungmung.ui
 
 import android.os.Bundle
 import android.view.*
@@ -7,8 +7,8 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
-import com.gomin.mungmung.R
-import com.gomin.mungmung.databinding.FragmentProfileBinding
+import com.android.mungmung.R
+import com.android.mungmung.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment(), MenuProvider {
     private var _binding: FragmentProfileBinding? = null

@@ -1,23 +1,24 @@
-package com.gomin.mungmung.ui
+package com.android.mungmung.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gomin.mungmung.databinding.FragmentPhotoBinding
+import com.android.mungmung.databinding.FragmentChangePwBinding
 
-class PhotoFragment : Fragment() {
-
-    private var _binding: FragmentPhotoBinding? = null
+class ChangePwFragment : Fragment() {
+    private var _binding: FragmentChangePwBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding =FragmentPhotoBinding.inflate(inflater,container,false)
+    ): View {
+
+        _binding = FragmentChangePwBinding.inflate(inflater,container,false)
         return binding.root
+
     }
 
     override fun onDestroyView() {

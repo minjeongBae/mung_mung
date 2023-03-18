@@ -1,12 +1,11 @@
-package com.gomin.mungmung
+package com.android.mungmung
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.gomin.mungmung.databinding.ActivityMainBinding
+import com.android.mungmung.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

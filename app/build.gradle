@@ -8,7 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.gomin.mungmung"
+        applicationId "com.android.mungmung"
         minSdk 21
         targetSdk 33
         versionCode 1

@@ -1,4 +1,4 @@
-package com.gomin.mungmung.ui
+package com.android.mungmung.ui
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.navigation.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.gomin.mungmung.R
+import com.android.mungmung.R
 
 class SettingFragment : PreferenceFragmentCompat()  {
 

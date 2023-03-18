@@ -1,4 +1,4 @@
-package com.gomin.mungmung
+package com.android.mungmung
 
 import org.junit.Test
 

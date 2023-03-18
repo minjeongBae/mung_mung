@@ -1,23 +1,22 @@
-package com.gomin.mungmung.ui
+package com.android.mungmung.ui
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import com.gomin.mungmung.R
-import com.gomin.mungmung.databinding.FragmentSignupBinding
+import com.android.mungmung.databinding.FragmentPhotoBinding
 
-class SignupFragment : Fragment() {
-    private var _binding: FragmentSignupBinding? = null
+class PhotoFragment : Fragment() {
+
+    private var _binding: FragmentPhotoBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSignupBinding.inflate(inflater, container, false)
+    ): View? {
+        _binding =FragmentPhotoBinding.inflate(inflater,container,false)
         return binding.root
     }
 

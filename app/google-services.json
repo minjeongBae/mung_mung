@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "947748557076",
+    "project_id": "gomin-mungmung",
+    "storage_bucket": "gomin-mungmung.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947748557076:android:a6a602a56870f5e98cf201",
+        "android_client_info": {
+          "package_name": "com.android.mungmung"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947748557076-6odh6h5aivk6gv0ikq7m5v690n0liu2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhg5-6PSKvU3avbiyjOC_Jr2j665gKAN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947748557076-6odh6h5aivk6gv0ikq7m5v690n0liu2e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947748557076:android:ff5b80e6aee36aa18cf201",
+        "android_client_info": {
+          "package_name": "com.gomin.mungmung"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947748557076-6odh6h5aivk6gv0ikq7m5v690n0liu2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhg5-6PSKvU3avbiyjOC_Jr2j665gKAN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947748557076-6odh6h5aivk6gv0ikq7m5v690n0liu2e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

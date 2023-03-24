@@ -22,7 +22,7 @@
     <style name="Custom.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/second_brown</item>
         <item name="android:textColorPrimary">@color/first_brown</item>
-        <item name="android:background">@color/white</item>
+
     </style>
     <style name="Theme.Mungmung.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.Mungmung.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

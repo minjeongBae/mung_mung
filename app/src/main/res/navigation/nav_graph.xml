@@ -8,35 +8,21 @@
     <fragment
         android:id="@+id/homeFragment"
         tools:layout="@layout/fragment_home"
-        android:name="com.android.mungmung.ui.HomeFragment"
-        android:label="HomeFragment" />
+        android:name="com.android.mungmung.ui.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_addArticleFragment"
+            app:destination="@id/addArticleFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
     <fragment
-        android:id="@+id/newPwFragment"
-        android:name="com.android.mungmung.ui.NewPwFragment"
-        android:label="NewPwFragment" />
-    <fragment
-        android:id="@+id/photoFragment"
-        android:name="com.android.mungmung.ui.PhotoFragment"
-        android:label="PhotoFragment" />
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.android.mungmung.ui.ProfileFragment"
-        android:label="ProfileFragment" />
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.android.mungmung.ui.SearchFragment"
-        android:label="SearchFragment" />
-    <fragment
-        android:id="@+id/settingFragment"
-        android:name="com.android.mungmung.ui.SettingFragment"
-        android:label="SettingFragment" />
-    <fragment
-        android:id="@+id/changePwFragment"
-        android:name="com.android.mungmung.ui.ChangePwFragment"
-        android:label="fragment_change_pw"
-        tools:layout="@layout/fragment_change_pw" />
-    <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.android.mungmung.ui.SignupFragment"
-        android:label="SignupFragment" />
+        tools:layout="@layout/fragment_add_article"
+        android:id="@+id/addArticleFragment"
+        android:name="com.android.mungmung.ui.home.AddArticleFragment"
+        android:label="AddArticleFragment" />
+
+
 </navigation>

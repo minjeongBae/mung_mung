@@ -22,7 +22,11 @@
         tools:layout="@layout/fragment_add_article"
         android:id="@+id/addArticleFragment"
         android:name="com.android.mungmung.ui.home.AddArticleFragment"
-        android:label="AddArticleFragment" />
+        android:label="AddArticleFragment" >
+        <action
+            android:id="@+id/actionBack"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 
 </navigation>

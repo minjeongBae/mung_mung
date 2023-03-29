@@ -10,9 +10,10 @@
         <item name="colorSecondaryVariant">@color/black</item>
         <item name="colorOnSecondary">@color/light_green</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorOnPrimary</item>
         <!-- Customize your theme here. -->
         <item name="toolbarStyle">@style/Custom.Toolbar</item>
+        <!-- <item name="android:windowFullscreen">true</item> -->
         <item name="android:windowFullscreen">true</item>
     </style>
 
@@ -22,7 +23,7 @@
     <style name="Custom.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/second_brown</item>
         <item name="android:textColorPrimary">@color/first_brown</item>
-        <item name="android:background">@color/white</item>
+
     </style>
     <style name="Theme.Mungmung.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.Mungmung.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

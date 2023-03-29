@@ -10,34 +10,14 @@ import androidx.navigation.findNavController
 import com.android.mungmung.R
 import com.android.mungmung.databinding.FragmentProfileBinding
 
-class ProfileFragment : Fragment(), MenuProvider {
-    private var _binding: FragmentProfileBinding? = null
-    private val binding get() = _binding!!
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentProfileBinding.inflate(inflater,container,false)
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
-        return binding.root
+    private lateinit var binding: FragmentProfileBinding
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentProfileBinding.bind(view)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.profile_menu,menu)
-    }
-
-    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        if (menuItem.itemId==R.id.setting_menu_item){
-            view?.findNavController()?.navigate(R.id.settingFragment)
-        }
-        return true
-    }
 
 }

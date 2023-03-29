@@ -7,36 +7,64 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        tools:layout="@layout/fragment_home"
-        android:name="com.android.mungmung.ui.HomeFragment"
-        android:label="HomeFragment" />
+        android:name="com.android.mungmung.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_addArticleFragment"
+            app:destination="@id/addArticleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/newPwFragment"
-        android:name="com.android.mungmung.ui.NewPwFragment"
-        android:label="NewPwFragment" />
-    <fragment
-        android:id="@+id/photoFragment"
-        android:name="com.android.mungmung.ui.PhotoFragment"
-        android:label="PhotoFragment" />
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.android.mungmung.ui.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:id="@+id/addArticleFragment"
+        android:name="com.android.mungmung.ui.home.AddArticleFragment"
+        android:label="AddArticleFragment"
+        tools:layout="@layout/fragment_add_article">
+        <action
+            android:id="@+id/actionBack"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.android.mungmung.ui.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+
     <fragment
-        android:id="@+id/settingFragment"
-        android:name="com.android.mungmung.ui.SettingFragment"
-        android:label="SettingFragment" />
+        android:id="@+id/photoFragment"
+        android:name="com.android.mungmung.ui.PhotoFragment"
+        android:label="fragment_photo"
+        tools:layout="@layout/fragment_photo" />
+
     <fragment
-        android:id="@+id/changePwFragment"
-        android:name="com.android.mungmung.ui.ChangePwFragment"
-        android:label="fragment_change_pw"
-        tools:layout="@layout/fragment_change_pw" />
+        android:id="@+id/profileFragment"
+        android:name="com.android.mungmung.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.android.mungmung.ui.SignupFragment"
-        android:label="SignupFragment" />
+        android:id="@+id/articleFragment"
+        android:name="com.android.mungmung.ui.home.ArticleFragment"
+        android:label="{userId} 님의 게시글"
+        tools:layout="@layout/fragment_article" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <argument
+            android:name="articleId"
+            app:argType="string" />
+    </fragment>
+
+
 </navigation>

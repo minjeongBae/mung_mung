@@ -23,6 +23,7 @@ import java.util.*
 class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
 
     private lateinit var binding: FragmentAddArticleBinding
+    private lateinit var auth: FirebaseAuth
     private var selectedUri: Uri? = null
 
     // todo 여러 장 업로드
@@ -39,6 +40,8 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddArticleBinding.bind(view)
+        auth = Firebase.auth
+
 
         startPicker()
         setupPhotoImageView()
@@ -143,6 +146,7 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
         val articleId = UUID.randomUUID().toString()
         val articleModel = ArticleModel(
             articleId = articleId,
+            userId = auth.currentUser?.email.toString(),
             createdAt = System.currentTimeMillis(),
             description = description,
             imageUrl = photoUrl

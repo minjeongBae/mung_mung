@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import com.android.mungmung.R
 import com.android.mungmung.databinding.FragmentProfileBinding
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
 
@@ -18,8 +18,6 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileBinding.bind(view)
     }
-
-
 
 
 }

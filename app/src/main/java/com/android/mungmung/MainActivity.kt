@@ -41,10 +41,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         if (auth.currentUser == null) {
             startActivity(Intent(this, LoginActivity::class.java))
-            Log.d("debug", "go login")
-        } else {
-            Log.d("debug", "not null")
-            Log.d("debug", auth.currentUser!!.email.toString())
+
         }
     }
 

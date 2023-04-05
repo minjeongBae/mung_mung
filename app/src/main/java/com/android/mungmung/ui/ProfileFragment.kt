@@ -3,7 +3,6 @@ package com.android.mungmung.ui
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import com.android.mungmung.R
 import com.android.mungmung.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -21,11 +20,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         binding = FragmentProfileBinding.bind(view)
         auth = Firebase.auth
 
-        binding.profileRecyclerview.apply {
-            layoutManager = GridLayoutManager(context, 3)
-        }
 
     }
-
-
 }

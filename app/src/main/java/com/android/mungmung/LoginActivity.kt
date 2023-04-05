@@ -8,12 +8,12 @@ import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.android.mungmung.databinding.ActivityLoginBinding
-import com.android.mungmung.ui.SignupFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -27,6 +27,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private lateinit var auth: FirebaseAuth
     private lateinit var task : Task<GoogleSignInAccount>
+    private lateinit var name : String
+    private lateinit var pet : String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,20 +65,30 @@ class LoginActivity : AppCompatActivity() {
                                         hashMapOf(
                                             "email" to task.result.email,
                                             "following" to 0,
-                                            "followers" to 0
+                                            "followers" to 0,
+                                            "name" to name,
+                                            "pet_name" to pet,
+                                            "posts" to 0
                                         ))}}
                     auth.signInWithCredential(credential).addOnCompleteListener{
                         finish()
-                        supportFragmentManager.beginTransaction()
-                            .add(R.id.container,SignupFragment()).commit()
                     }
                 }
             }
         }
 
         binding.btnGoogleLogIn.setOnClickListener{
-            val signInIntent : Intent = mGoogleSignInClient.signInIntent
-            resultLauncher.launch(signInIntent)
+            name = binding.signupName.text.toString()
+            pet = binding.signupPet.text.toString()
+            Log.d(name,pet)
+
+            if(name!="" && pet!=""){
+                val signInIntent : Intent = mGoogleSignInClient.signInIntent
+                resultLauncher.launch(signInIntent)
+            }
+            else{
+                Snackbar.make(binding.root, "정보를 모두 입력해주세요.", Snackbar.LENGTH_SHORT).show()
+            }
         }
     }
 }

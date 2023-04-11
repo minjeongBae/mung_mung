@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        startActivity(Intent(this, LoginActivity::class.java))
-
         if (auth.currentUser == null) {
             startActivity(Intent(this, LoginActivity::class.java))
         }

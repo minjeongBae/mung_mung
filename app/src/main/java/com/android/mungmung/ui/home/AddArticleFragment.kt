@@ -42,6 +42,7 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
         binding = FragmentAddArticleBinding.bind(view)
         auth = Firebase.auth
 
+        Log.d("currentUser",auth.currentUser?.email.toString())
 
         startPicker()
         setupPhotoImageView()
@@ -122,11 +123,9 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
                         .downloadUrl
                         .addOnSuccessListener {
                             successHandler(it.toString())
-
                         }.addOnFailureListener {
                             errorHandler(it)
                         }
-
                 } else {
                     errorHandler(task.exception)
                 }
@@ -159,6 +158,22 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
 
                 view?.let { view ->
                     Snackbar.make(view, "글 작성에 성공했습니다.", Snackbar.LENGTH_SHORT).show()
+
+                    Firebase.firestore.collection("users").whereEqualTo("email",auth.currentUser?.email.toString())
+                        .get().addOnSuccessListener {querySnapshot ->
+                            for (doc in querySnapshot.documents) {
+                                val userArticles = mutableListOf(doc.get("articles"))
+                                userArticles.add(articleId)
+                                doc.reference.update(
+                                    hashMapOf(
+                                        "articles" to userArticles,
+                                        "posts" to Integer.parseInt(doc.get("posts").toString())+1,
+                                    ) as Map<String, Any>
+                                )}
+                        }.addOnFailureListener { exception ->
+                            Log.e("TAG", "Error updating documents: ", exception)
+                        }
+
                 }
             }
             .addOnFailureListener {

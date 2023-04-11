@@ -154,27 +154,21 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
         Firebase.firestore.collection("articles").document(articleId)
             .set(articleModel)
             .addOnSuccessListener {
+
                 findNavController().navigate(AddArticleFragmentDirections.actionBack())
 
                 view?.let { view ->
                     Snackbar.make(view, "글 작성에 성공했습니다.", Snackbar.LENGTH_SHORT).show()
-
-                    Firebase.firestore.collection("users").whereEqualTo("email",auth.currentUser?.email.toString())
-                        .get().addOnSuccessListener {querySnapshot ->
-                            for (doc in querySnapshot.documents) {
-                                val userArticles = mutableListOf(doc.get("articles"))
-                                userArticles.add(articleId)
-                                doc.reference.update(
-                                    hashMapOf(
-                                        "articles" to userArticles,
-                                        "posts" to Integer.parseInt(doc.get("posts").toString())+1,
-                                    ) as Map<String, Any>
-                                )}
-                        }.addOnFailureListener { exception ->
-                            Log.e("TAG", "Error updating documents: ", exception)
-                        }
-
                 }
+
+                val userdb = Firebase.firestore.collection("users")
+                userdb.whereEqualTo("email", auth.currentUser?.email.toString()).get()
+                    .addOnSuccessListener { querySnapshot ->
+                        for (document in querySnapshot.documents){
+                            document.reference.collection("my_articles")
+                                .document(articleId).set(articleModel)
+                            document.reference.update("posts",Integer.parseInt(document.get("posts").toString())+1)
+                        }}
             }
             .addOnFailureListener {
                 it.printStackTrace()
@@ -187,6 +181,4 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
         hideProgress()
 
     }
-
-
 }

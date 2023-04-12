@@ -3,11 +3,13 @@ package com.android.mungmung.ui
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.mungmung.R
 import com.android.mungmung.data.ArticleModel
 import com.android.mungmung.data.UserData
 import com.android.mungmung.databinding.FragmentProfileBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -63,6 +65,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 binding.profileTextFollowsNum.text = userData.following.toString()
                 binding.profileTextFollowersNum.text = userData.followers.toString()
             }
+        }
+
+        binding.profileEditBtn.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToChangeProfileFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.removeArticleBtn.setOnClickListener {
+            Snackbar.make(view, "삭제할 게시물을 눌러주세요.", Snackbar.LENGTH_SHORT).show()
         }
     }
 }

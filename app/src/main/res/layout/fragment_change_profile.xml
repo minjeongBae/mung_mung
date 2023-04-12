@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeProfile">
+
+    <ImageView
+        android:id="@+id/change_profile_imageview"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/baseline_account_circle_24"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edit_profile_name_txt"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription,MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_profile_name_txt"
+        android:text="@string/user_name"
+        android:textSize="15sp"
+        android:textColor="@color/second_brown"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintLeft_toLeftOf="@id/edit_profile_name_edit"
+        app:layout_constraintTop_toBottomOf="@id/change_profile_imageview"
+        app:layout_constraintBottom_toTopOf="@id/edit_profile_name_edit"
+        />
+
+    <EditText
+        android:id="@+id/edit_profile_name_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/edit_profile_name_txt"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:inputType="text"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_profile_pet_txt"
+        android:text="@string/pet_name"
+        android:textSize="15sp"
+        android:textColor="@color/second_brown"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintLeft_toLeftOf="@id/edit_profile_pet_edit"
+        app:layout_constraintTop_toBottomOf="@id/edit_profile_name_edit"
+        app:layout_constraintBottom_toTopOf="@id/edit_profile_pet_edit"
+        />
+
+    <EditText
+        android:id="@+id/edit_profile_pet_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/edit_profile_pet_txt"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:inputType="text"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_profile_finish_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/finish"
+        android:textSize="20sp"
+        android:textColor="@color/second_brown"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

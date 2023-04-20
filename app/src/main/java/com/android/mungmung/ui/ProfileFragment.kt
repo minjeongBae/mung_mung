@@ -19,6 +19,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var auth: FirebaseAuth
+    private val userName = arguments?.getString("user_name")
+    private val petName = arguments?.getString("pet_name")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,6 +37,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             layoutManager = GridLayoutManager(context,3)
             adapter = profileAdapter
         }
+
         auth = Firebase.auth
 
         val currentUser = auth.currentUser
@@ -72,11 +75,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
 
         binding.profileEditBtn.setOnClickListener {
-            val user_name = userData.name
-            val pet_name = userData.pet
-            val action = ProfileFragmentDirections.actionProfileFragmentToChangeProfileFragment(user_name,pet_name)
+            val action = ProfileFragmentDirections.actionProfileFragmentToChangeProfileFragment()
             findNavController().navigate(action)
         }
 
     }
+
+    override fun onStart() {
+        super.onStart()
+
+        if(userName!="") binding.profileUserName.text = userName
+        if(petName!="") binding.profilePetName.text = petName
+
+    }
+
 }

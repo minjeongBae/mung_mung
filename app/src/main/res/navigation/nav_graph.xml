@@ -59,14 +59,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" >
-            <argument
-                android:name="user_name"
-                app:argType="string"/>
-            <argument
-                android:name="pet_name"
-                app:argType="string"/>
-        </action>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_profileFragment_to_articleFragment"
             app:destination="@id/articleFragment"
@@ -96,7 +89,14 @@
         tools:layout="@layout/fragment_change_profile" >
         <action
             android:id="@+id/action_changeProfile_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment" >
+            <argument
+                android:name="user_name"
+                app:argType="string"/>
+            <argument
+                android:name="pet_name"
+                app:argType="string"/>
+        </action>
     </fragment>
 
 

@@ -9,7 +9,6 @@ import com.android.mungmung.R
 import com.android.mungmung.data.ArticleModel
 import com.android.mungmung.data.UserData
 import com.android.mungmung.databinding.FragmentProfileBinding
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,7 +23,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val profileAdapter = ProfileAdapter{}
+        val profileAdapter = ProfileAdapter{
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment(
+                userId = it.userId.orEmpty(),
+                articleId = it.articleId.orEmpty()
+            ))
+        }
 
         binding = FragmentProfileBinding.bind(view)
         binding.profileRecyclerview.apply {
@@ -68,12 +72,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
 
         binding.profileEditBtn.setOnClickListener {
-            val action = ProfileFragmentDirections.actionProfileFragmentToChangeProfileFragment()
+            val user_name = userData.name
+            val pet_name = userData.pet
+            val action = ProfileFragmentDirections.actionProfileFragmentToChangeProfileFragment(user_name,pet_name)
             findNavController().navigate(action)
         }
 
-        binding.removeArticleBtn.setOnClickListener {
-            Snackbar.make(view, "삭제할 게시물을 눌러주세요.", Snackbar.LENGTH_SHORT).show()
-        }
     }
 }

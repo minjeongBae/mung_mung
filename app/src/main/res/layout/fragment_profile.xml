@@ -153,28 +153,18 @@
         android:id="@+id/profile_edit_btn"
         app:layout_constraintTop_toBottomOf="@id/profile_image"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/remove_article_btn"
+        app:layout_constraintRight_toRightOf="parent"
         android:text="@string/edit_profile"
         android:layout_marginTop="40dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="10dp"/>
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/remove_article_btn"
-        app:layout_constraintTop_toBottomOf="@id/profile_image"
-        app:layout_constraintLeft_toRightOf="@id/profile_edit_btn"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/remove_articles"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="25dp"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/profile_recyclerview"
-        app:layout_constraintTop_toBottomOf="@id/remove_article_btn"
+        app:layout_constraintTop_toBottomOf="@id/profile_edit_btn"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"

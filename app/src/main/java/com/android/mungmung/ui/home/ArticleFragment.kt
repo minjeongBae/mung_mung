@@ -11,6 +11,7 @@ import com.android.mungmung.R
 import com.android.mungmung.data.ArticleModel
 import com.android.mungmung.databinding.FragmentArticleBinding
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -71,6 +72,7 @@ class ArticleFragment: Fragment(R.layout.fragment_article) {
                                 )
                             }
                         }
+                    Snackbar.make(view, "해당 게시물이 삭제되었습니다.", Snackbar.LENGTH_SHORT).show()
                 }
                 .show()
         }

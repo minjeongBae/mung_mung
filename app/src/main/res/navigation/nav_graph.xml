@@ -40,7 +40,11 @@
         android:id="@+id/searchFragment"
         android:name="com.android.mungmung.ui.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/photoFragment"
@@ -52,7 +56,24 @@
         android:id="@+id/profileFragment"
         android:name="com.android.mungmung.ui.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_changeProfileFragment"
+            app:destination="@id/changeProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_profileFragment_to_articleFragment"
+            app:destination="@id/articleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+
+    </fragment>
     <fragment
         android:id="@+id/articleFragment"
         android:name="com.android.mungmung.ui.home.ArticleFragment"
@@ -64,6 +85,22 @@
         <argument
             android:name="articleId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeProfile"
+        android:name="com.android.mungmung.ChangeProfile"
+        android:label="fragment_change_profile"
+        tools:layout="@layout/fragment_change_profile" >
+        <action
+            android:id="@+id/action_changeProfile_to_profileFragment"
+            app:destination="@id/profileFragment" >
+            <argument
+                android:name="user_name"
+                app:argType="string"/>
+            <argument
+                android:name="pet_name"
+                app:argType="string"/>
+        </action>
     </fragment>
 
 

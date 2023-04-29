@@ -42,6 +42,7 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
         binding = FragmentAddArticleBinding.bind(view)
         auth = Firebase.auth
 
+        Log.d("currentUser",auth.currentUser?.email.toString())
 
         startPicker()
         setupPhotoImageView()
@@ -122,11 +123,9 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
                         .downloadUrl
                         .addOnSuccessListener {
                             successHandler(it.toString())
-
                         }.addOnFailureListener {
                             errorHandler(it)
                         }
-
                 } else {
                     errorHandler(task.exception)
                 }
@@ -155,11 +154,21 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
         Firebase.firestore.collection("articles").document(articleId)
             .set(articleModel)
             .addOnSuccessListener {
+
                 findNavController().navigate(AddArticleFragmentDirections.actionBack())
 
                 view?.let { view ->
                     Snackbar.make(view, "글 작성에 성공했습니다.", Snackbar.LENGTH_SHORT).show()
                 }
+
+                val userdb = Firebase.firestore.collection("users")
+                userdb.whereEqualTo("email", auth.currentUser?.email.toString()).get()
+                    .addOnSuccessListener { querySnapshot ->
+                        for (document in querySnapshot.documents){
+                            document.reference.collection("my_articles")
+                                .document(articleId).set(articleModel)
+                            document.reference.update("posts",Integer.parseInt(document.get("posts").toString())+1)
+                        }}
             }
             .addOnFailureListener {
                 it.printStackTrace()
@@ -172,6 +181,4 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
         hideProgress()
 
     }
-
-
 }

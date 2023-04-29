@@ -1,9 +1,10 @@
-package com.android.mungmung
+package com.android.mungmung.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import com.android.mungmung.R
 import com.android.mungmung.databinding.FragmentChangeProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth

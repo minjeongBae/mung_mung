@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/changeProfile"
-        android:name="com.android.mungmung.ChangeProfile"
+        android:name="com.android.mungmung.ui.ChangeProfile"
         android:label="fragment_change_profile"
         tools:layout="@layout/fragment_change_profile" >
         <action

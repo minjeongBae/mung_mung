@@ -9,6 +9,7 @@ import com.android.mungmung.R
 import com.android.mungmung.data.ArticleModel
 import com.android.mungmung.data.UserData
 import com.android.mungmung.databinding.FragmentProfileBinding
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,8 +20,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var auth: FirebaseAuth
-    private val userName = arguments?.getString("user_name")
-    private val petName = arguments?.getString("pet_name")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,6 +41,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         val currentUser = auth.currentUser
         var userData= UserData("","",0,0,0)
+        var profileImage: String?=null
         val userdb = FirebaseFirestore.getInstance().collection("users")
         var myArticles = mutableListOf<ArticleModel>()
 
@@ -55,6 +55,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         Integer.parseInt(document.getLong("followers").toString()),
                         Integer.parseInt(document.getLong("posts").toString())
                     )
+                    profileImage = document.getString("profile_image_url").toString()
+
                     userdb.document(document.id).collection("my_articles")
                         .get()
                         .addOnSuccessListener { snapshot ->
@@ -66,26 +68,23 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                             }
                             profileAdapter.submitList(myArticles)
                     }
-                binding.profileTextPostsNum.text = userData.posts.toString()
-                binding.profileUserName.text = userData.name
-                binding.profilePetName.text = userData.pet
-                binding.profileTextFollowsNum.text = userData.following.toString()
-                binding.profileTextFollowersNum.text = userData.followers.toString()
+                    binding.profileTextPostsNum.text = userData.posts.toString()
+                    binding.profileUserName.text = userData.name
+                    binding.profilePetName.text = userData.pet
+                    binding.profileTextFollowsNum.text = userData.following.toString()
+                    binding.profileTextFollowersNum.text = userData.followers.toString()
+                    if(profileImage!="null"){
+                        Glide.with(binding.profileImage)
+                            .load(profileImage)
+                            .into(binding.profileImage)
+                    }
+                }
             }
-        }
 
         binding.profileEditBtn.setOnClickListener {
             val action = ProfileFragmentDirections.actionProfileFragmentToChangeProfileFragment()
             findNavController().navigate(action)
         }
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        if(userName!="") binding.profileUserName.text = userName
-        if(petName!="") binding.profilePetName.text = petName
 
     }
 

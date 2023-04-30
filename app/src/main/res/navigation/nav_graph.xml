@@ -94,12 +94,6 @@
         <action
             android:id="@+id/action_changeProfile_to_profileFragment"
             app:destination="@id/profileFragment" >
-            <argument
-                android:name="user_name"
-                app:argType="string"/>
-            <argument
-                android:name="pet_name"
-                app:argType="string"/>
         </action>
     </fragment>
 

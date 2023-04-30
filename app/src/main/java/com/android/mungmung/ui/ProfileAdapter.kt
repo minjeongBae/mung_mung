@@ -2,32 +2,37 @@ package com.android.mungmung.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.mungmung.data.ArticleModel
-import com.android.mungmung.databinding.ItemProfileArticleBinding
+import com.android.mungmung.databinding.ItemArticleBinding
 import com.bumptech.glide.Glide
 
 class ProfileAdapter (val onItemClicked: (ArticleModel) -> Unit) : ListAdapter<ArticleModel,ProfileAdapter.ViewHolder>(diffUtil){
-    inner class ViewHolder (private val binding: ItemProfileArticleBinding):
-    RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(private val binding: ItemArticleBinding):
+        RecyclerView.ViewHolder(binding.root) {
+
         fun bind(articleModel: ArticleModel) {
 
-            Glide.with(binding.imageViewProfileArticle)
+            binding.bookmarkImageView.isVisible = false
+
+            Glide.with(binding.articleImageView)
                 .load(articleModel.imageUrl)
-                .into(binding.imageViewProfileArticle)
+                .into(binding.articleImageView)
 
             binding.root.setOnClickListener {
                 onItemClicked(articleModel)
             }
 
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType:Int):ViewHolder{
         return ViewHolder(
-            ItemProfileArticleBinding.inflate(
+            ItemArticleBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
             )

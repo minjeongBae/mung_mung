@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.util.*
@@ -49,7 +50,7 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
         setupClearImageView()
         setupBackImageButton()
         setupSubmitButton(view)
-
+        initCheckBox()
     }
 
     private fun startPicker() {
@@ -113,6 +114,7 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
         successHandler: (String) -> Unit,
         errorHandler: (Throwable?) -> Unit
     ) {
+
         val fileName = "${UUID.randomUUID()}.png"
         Firebase.storage.reference.child("articles").child(fileName)
             .putFile(uri)
@@ -130,6 +132,9 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
                     errorHandler(task.exception)
                 }
             }
+
+
+
     }
 
 
@@ -179,6 +184,16 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
             }
 
         hideProgress()
+
+    }
+
+    private fun initCheckBox() {
+        
+        binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            binding.ageEditText.isVisible = isChecked
+            binding.dateEditText.isVisible = isChecked
+            binding.phoneNumberEditText.isVisible = isChecked
+        }
 
     }
 }

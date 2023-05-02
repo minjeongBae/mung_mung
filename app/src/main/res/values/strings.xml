@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">mungmung</string>
-    <string name="title_home">Home</string>
-    <string name="title_search">Bookmarks</string>
-    <string name="title_profile">Profile</string>
-    <string name="title_photo">Photo</string>
+    <string name="title_home">홈</string>
+    <string name="title_search">북마크</string>
+    <string name="title_profile">프로필</string>
+    <string name="title_photo">유기견</string>
 
     <!-- Strings related to login -->
     <string name="top_welcome">Welcome</string>

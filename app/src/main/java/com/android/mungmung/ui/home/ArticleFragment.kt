@@ -2,6 +2,7 @@ package com.android.mungmung.ui.home
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -29,19 +30,32 @@ class ArticleFragment: Fragment(R.layout.fragment_article) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentArticleBinding.bind(view)
 
-        val userId = args.userId
-        val articleId = args.articleId
+        var userId = args.userId
+        var articleId = args.articleId
+
+        if(!userId.contains("@")){
+            var temp = userId
+            userId = articleId
+            articleId = temp
+        }
+
         val articleRef = Firebase.firestore.collection("articles")
         auth = Firebase.auth
 
         binding.toolBar.setupWithNavController(findNavController())
+        binding.toolBar.title = userId
+        Log.d("toolBar",binding.toolBar.title.toString())
+        Log.d("args",args.toString())
 
 
         articleRef.document(articleId)
             .get()
             .addOnSuccessListener {
+
                 val model = it.toObject<ArticleModel>()
                 binding.descriptionTextView.text = model?.description
+
+                Log.d("model",articleId)
 
                 Glide.with(binding.ImageView)
                     .load(model?.imageUrl)

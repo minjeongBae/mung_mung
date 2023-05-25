@@ -56,10 +56,21 @@ class LoginActivity : AppCompatActivity() {
                         .whereEqualTo("email", task.result.email)
                         .get().addOnSuccessListener { querySnapshot ->
                             if (querySnapshot.documents.isNotEmpty()){
+
+
+
                                 Log.d("doc", querySnapshot.documents[0].data.toString())
                             }
                             else{
                                 Log.d("No such document"," ")
+//
+//                                Firebase.auth.currentUser?.uid?.let {
+//                                    Firebase.firestore.collection("followUser").document(it)
+//                                        .set(
+//                                            hashMapOf("users" to listOf(task.result.email.toString())
+//                                            ))
+//                                }
+
                                 FirebaseFirestore.getInstance()
                                     .collection("users").add(
                                         hashMapOf(

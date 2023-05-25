@@ -1,5 +1,7 @@
 package com.android.mungmung.ui
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +10,12 @@ import android.view.View
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
+import com.android.mungmung.LoginActivity
 import com.android.mungmung.R
 import com.android.mungmung.databinding.FragmentChangeProfileBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -21,6 +27,7 @@ import java.util.*
 class ChangeProfile : Fragment(R.layout.fragment_change_profile) {
 
     private lateinit var binding: FragmentChangeProfileBinding
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
 
     private var selectedUri: Uri? = null
@@ -39,6 +46,21 @@ class ChangeProfile : Fragment(R.layout.fragment_change_profile) {
 
         binding = FragmentChangeProfileBinding.bind(view)
         auth = Firebase.auth
+
+
+        binding.logoutBtn.setOnClickListener {
+            val dialog = AlertDialog.Builder(context).setTitle("로그아웃")
+                .setMessage("로그아웃 하시겠습니까?")
+                .setPositiveButton("네") { dialogInterface, i ->
+                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestEmail()
+                        .requestIdToken(getString(R.string.default_web_client_id)).build()
+                    mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+                    mGoogleSignInClient.signOut()
+                    startActivity(Intent(requireActivity(), LoginActivity::class.java))
+                }.show()
+
+        }
 
         binding.editProfileFinishBtn.setOnClickListener {
             val name = binding.editProfileNameEdit

@@ -88,6 +88,17 @@ class OtherUserFragment : Fragment(R.layout.fragment_other_user) {
             }
         binding.otherUserFollowBtn.setOnClickListener {
             Log.d("팔로우버튼","clicked")
+
+
+            
+            userdb.whereEqualTo("email", userId)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    for (document in querySnapshot.documents){
+                        val map = mutableMapOf<String,Int>()
+                        map.put("followers", Integer.parseInt(document.get("followers").toString())+1)
+                        document.reference.update(map as Map<String, Any>)
+                    }}
         }
     }
 }

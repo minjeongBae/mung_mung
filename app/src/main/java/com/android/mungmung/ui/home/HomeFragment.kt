@@ -2,7 +2,6 @@ package com.android.mungmung.ui.home
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -55,6 +54,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setupRecyclerView() {
         articleAdapter = HomeArticleAdapter(
+
             onItemClicked = {
                 findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToArticleFragment(

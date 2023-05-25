@@ -3,16 +3,12 @@ package com.android.mungmung.ui
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.mungmung.R
+import com.android.mungmung.data.ArticleModel
 import com.android.mungmung.databinding.FragmentPhotoBinding
-import com.android.mungmung.databinding.FragmentSearchBinding
-import com.android.mungmung.ui.home.BookmarkArticleAdapter
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -20,15 +16,18 @@ import com.google.firebase.ktx.Firebase
 class PhotoFragment : Fragment(R.layout.fragment_photo) {
 
     private lateinit var binding: FragmentPhotoBinding
-    private lateinit var bookmarkArticleAdapter: BookmarkArticleAdapter
+    private lateinit var abandonedAdapter: AbandonedAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPhotoBinding.bind(view)
 
-        bookmarkArticleAdapter = BookmarkArticleAdapter {
+        abandonedAdapter = AbandonedAdapter {
+
+            Log.d(it.articleId,it.userId.toString())
+
             findNavController().navigate(
-                SearchFragmentDirections.actionSearchFragmentToArticleFragment(
+                PhotoFragmentDirections.actionPhotoFragmentToArticleFragment(
                     it.articleId.orEmpty(),
                     it.userId.orEmpty()
                 )
@@ -37,35 +36,27 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
 
         binding.abandonedRecyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
-            adapter = bookmarkArticleAdapter
+            adapter = abandonedAdapter
 
         }
 
-        val uid = Firebase.auth.currentUser?.uid.orEmpty()
-        Firebase.firestore.collection("bookmarks")
-            .document(uid)
+        Firebase.firestore.collection("abandoned")
             .get()
-            .addOnSuccessListener {
+            .addOnSuccessListener { result ->
+                val list = result
+                    .map { queryDocumentSnapshot -> queryDocumentSnapshot.toObject<ArticleModel>() }
+                    .map { model ->
 
-                val list = it.get("articleIds") as List<*>
-                Log.d("dataList", {list}.toString())
+                        ArticleModel(
+                            articleId = model.articleId.orEmpty(),
+                            userId = model.userId.orEmpty(),
+                            description = model.description.orEmpty(),
+                            imageUrl = model.imageUrl.orEmpty()
+                        )
 
-                if (list.isNotEmpty()) {
-                    Firebase.firestore.collection("articles")
-                        .whereIn("articleId", list)
-                        .get()
-                        .addOnSuccessListener { result ->
-                            bookmarkArticleAdapter.submitList(result.map { article -> article.toObject() })
-                        }
-                        .addOnFailureListener {
-                            it.printStackTrace()
-                        }
+                    }
 
-                }
-
-            }
-            .addOnFailureListener {
-                Log.d("data", it.toString())
+                abandonedAdapter.submitList(list)
             }
     }
 }

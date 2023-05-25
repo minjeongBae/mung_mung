@@ -16,7 +16,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.util.*
@@ -133,8 +132,6 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
                 }
             }
 
-
-
     }
 
 
@@ -155,6 +152,25 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
             description = description,
             imageUrl = photoUrl
         )
+
+        if(binding.checkBox.isChecked){
+            Log.d("checkBox","유기견입니다.")
+            Firebase.firestore.collection("abandoned").document(articleId)
+                .set(articleModel)
+                .addOnSuccessListener {
+                    //findNavController().navigate(AddArticleFragmentDirections.actionBack())
+                    view?.let { view ->
+                        Snackbar.make(view, "유기견 글 작성에 성공했습니다.", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener {
+                    it.printStackTrace()
+                    view?.let { view ->
+                        Snackbar.make(view, "유기견 글 작성에 실패했습니다.", Snackbar.LENGTH_SHORT).show()
+                    }
+                    hideProgress()
+                }
+        }
 
         Firebase.firestore.collection("articles").document(articleId)
             .set(articleModel)
@@ -193,6 +209,7 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
             binding.ageEditText.isVisible = isChecked
             binding.dateEditText.isVisible = isChecked
             binding.phoneNumberEditText.isVisible = isChecked
+
         }
 
     }

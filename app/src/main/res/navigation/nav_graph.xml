@@ -50,7 +50,11 @@
         android:id="@+id/photoFragment"
         android:name="com.android.mungmung.ui.PhotoFragment"
         android:label="fragment_photo"
-        tools:layout="@layout/fragment_photo" />
+        tools:layout="@layout/fragment_photo" >
+        <action
+            android:id="@+id/action_photoFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"

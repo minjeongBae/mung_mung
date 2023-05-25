@@ -10,12 +10,13 @@ import com.android.mungmung.data.ArticleModel
 import com.android.mungmung.databinding.ItemArticleBinding
 import com.bumptech.glide.Glide
 
-class ProfileAdapter (val onItemClicked: (ArticleModel) -> Unit) :
-    ListAdapter<ArticleModel,ProfileAdapter.ViewHolder>(diffUtil){
-    inner class ViewHolder(private val binding: ItemArticleBinding):
-        RecyclerView.ViewHolder(binding.root) {
+class AbandonedAdapter  (val onItemClicked: (ArticleModel) -> Unit)
+    : ListAdapter<ArticleModel, AbandonedAdapter.ViewHolder>(diffUtil){
 
-        fun bind(articleModel: ArticleModel) {
+    inner class ViewHolder(private val binding: ItemArticleBinding):
+        RecyclerView.ViewHolder(binding.root){
+
+        fun bind(articleModel: ArticleModel){
 
             binding.bookmarkImageView.isVisible = false
 
@@ -26,16 +27,15 @@ class ProfileAdapter (val onItemClicked: (ArticleModel) -> Unit) :
             binding.root.setOnClickListener {
                 onItemClicked(articleModel)
             }
-
         }
-
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType:Int):ViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemArticleBinding.inflate(
                 LayoutInflater.from(parent.context),
-                parent, false
+                parent,
+                false
             )
         )
     }
@@ -43,6 +43,7 @@ class ProfileAdapter (val onItemClicked: (ArticleModel) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(currentList[position])
     }
+
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<ArticleModel>() {

@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.android.mungmung.R
+import com.android.mungmung.data.Abandoned
 import com.android.mungmung.data.ArticleModel
 import com.android.mungmung.databinding.FragmentAddArticleBinding
 import com.google.android.material.snackbar.Snackbar
@@ -50,6 +51,7 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
         setupBackImageButton()
         setupSubmitButton(view)
         initCheckBox()
+
     }
 
     private fun startPicker() {
@@ -154,11 +156,26 @@ class AddArticleFragment: Fragment(R.layout.fragment_add_article) {
         )
 
         if(binding.checkBox.isChecked){
+            val age = binding.ageEditText.text.toString()
+            val phone = binding.phoneNumberEditText.text.toString()
+            val date = binding.dateEditText.text.toString()
+
+            val abandonedModel = Abandoned(
+                articleId = articleId,
+                userId = auth.currentUser?.email.toString(),
+                createdAt = System.currentTimeMillis(),
+                description = description,
+                imageUrl = photoUrl,
+                age = age,
+                phone = phone,
+                date = date
+            )
+
             Log.d("checkBox","유기견입니다.")
             Firebase.firestore.collection("abandoned").document(articleId)
-                .set(articleModel)
+                .set(abandonedModel)
                 .addOnSuccessListener {
-                    //findNavController().navigate(AddArticleFragmentDirections.actionBack())
+
                     view?.let { view ->
                         Snackbar.make(view, "유기견 글 작성에 성공했습니다.", Snackbar.LENGTH_SHORT).show()
                     }

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.android.mungmung.R
+import com.android.mungmung.data.Abandoned
 import com.android.mungmung.data.ArticleModel
 import com.android.mungmung.databinding.FragmentArticleBinding
 import com.bumptech.glide.Glide
@@ -33,14 +34,69 @@ class ArticleFragment: Fragment(R.layout.fragment_article) {
         var userId = args.userId
         var articleId = args.articleId
 
+
         if(!userId.contains("@")){
-            var temp = userId
+            val temp = userId
             userId = articleId
             articleId = temp
+
+            Log.d("userId",userId)
+            binding.toolBar.title = userId
         }
 
-        val articleRef = Firebase.firestore.collection("articles")
+
         auth = Firebase.auth
+        val articleRef = Firebase.firestore
+
+        articleRef.collection("abandoned").document(articleId)
+            .get()
+            .addOnSuccessListener{
+                if(it.exists()){
+                    val model = it.toObject<Abandoned>()!!
+                    binding.descriptionTextView.text = model.description
+
+                    Log.d("model",articleId)
+
+
+                    binding.abandonedText.visibility = View.VISIBLE
+                    binding.abandonedText.text = "이 유기견의 추정 나이는 " + model.age.toString()+
+                            "살입니다.\n 이 강아지를 보호하고 싶으신 분은 ["+
+                            model.phone.toString()+"]으로 연락주시길 바랍니다."
+
+                    Glide.with(binding.ImageView)
+                        .load(model.imageUrl)
+                        .into(binding.ImageView)
+
+                    if(auth.currentUser?.email == model.userId.toString()){
+                        binding.removeArticleBtn.visibility = View.VISIBLE
+                    }
+                }
+
+
+                else {
+                    articleRef.collection("articles").document(articleId)
+                        .get()
+                        .addOnSuccessListener {
+
+                            val model = it.toObject<ArticleModel>()
+                            binding.descriptionTextView.text = model?.description
+
+                            Log.d("model",articleId)
+
+                            Glide.with(binding.ImageView)
+                                .load(model?.imageUrl)
+                                .into(binding.ImageView)
+
+                            if(auth.currentUser?.email == model?.userId.toString()){
+                                binding.removeArticleBtn.visibility = View.VISIBLE
+                            }
+                        }
+                        .addOnFailureListener {
+
+                        }
+                }
+            }
+
 
         binding.toolBar.setupWithNavController(findNavController())
 
@@ -48,38 +104,17 @@ class ArticleFragment: Fragment(R.layout.fragment_article) {
             // 다른 사용자 페이지 보여주기
             findNavController().navigate(
                 ArticleFragmentDirections.actionArticleProfileToOtherUserFragment(
-                    userId = userId.orEmpty()
+                    userId = userId
                 )
             )
         }
 
 
-        articleRef.document(articleId)
-            .get()
-            .addOnSuccessListener {
-
-                val model = it.toObject<ArticleModel>()
-                binding.descriptionTextView.text = model?.description
-
-                Log.d("model",articleId)
-
-                Glide.with(binding.ImageView)
-                    .load(model?.imageUrl)
-                    .into(binding.ImageView)
-
-                if(auth.currentUser?.email == model?.userId.toString()){
-                    binding.removeArticleBtn.visibility = View.VISIBLE
-                }
-            }
-            .addOnFailureListener {
-
-            }
-
         binding.removeArticleBtn.setOnClickListener {
             val dialog = AlertDialog.Builder(context).setTitle("게시물 삭제")
                 .setMessage("해당 게시물을 삭제하시겠습니까?")
                 .setPositiveButton("삭제") { dialogInterface, i ->
-                    articleRef.document(articleId).delete()
+                    articleRef.collection("articles").document(articleId).delete()
                     Firebase.firestore.collection("users")
                         .whereEqualTo("email", auth.currentUser?.email.toString()).get()
                         .addOnSuccessListener { querySnapshot ->

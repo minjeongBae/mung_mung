@@ -28,8 +28,8 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
 
             findNavController().navigate(
                 PhotoFragmentDirections.actionPhotoFragmentToArticleFragment(
-                    it.articleId.orEmpty(),
-                    it.userId.orEmpty()
+                    it.userId.orEmpty(),it.articleId.orEmpty(),
+                    abandoned = "y"
                 )
             )
         }

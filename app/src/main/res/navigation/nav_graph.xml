@@ -92,6 +92,10 @@
         <argument
             android:name="articleId"
             app:argType="string" />
+        <argument
+            android:name="abandoned"
+            app:argType="string" />
+
         <action
             android:id="@+id/action_articleProfile_to_otherUserFragment"
             app:destination="@id/otherUserFragment" >

@@ -32,7 +32,8 @@ class OtherUserFragment : Fragment(R.layout.fragment_other_user) {
         val otherUserAdapter = OtherUserAdapter{
             findNavController().navigate(OtherUserFragmentDirections.actionOtherUserToArticleFragment(
                 userId = it.userId.orEmpty(),
-                articleId = it.articleId.orEmpty()
+                articleId = it.articleId.orEmpty(),
+                abandoned = "n"
             ))
         }
 

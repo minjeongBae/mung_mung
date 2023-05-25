@@ -28,7 +28,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         val profileAdapter = ProfileAdapter{
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToArticleFragment(
                 userId = it.userId.orEmpty(),
-                articleId = it.articleId.orEmpty()
+                articleId = it.articleId.orEmpty(),
+                abandoned = "n"
             ))
         }
 

@@ -3,13 +3,10 @@ package com.android.mungmung.ui
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.mungmung.R
-import com.android.mungmung.data.ArticleModel
 import com.android.mungmung.databinding.FragmentSearchBinding
 import com.android.mungmung.ui.home.BookmarkArticleAdapter
 import com.google.firebase.auth.ktx.auth
@@ -29,8 +26,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         bookmarkArticleAdapter = BookmarkArticleAdapter {
             findNavController().navigate(
                 SearchFragmentDirections.actionSearchFragmentToArticleFragment(
-                    it.articleId.orEmpty(),
-                    it.userId.orEmpty()
+                    it.userId.orEmpty(),it.articleId.orEmpty(),
+                    abandoned = "n"
                 )
             )
         }
@@ -55,12 +52,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         .whereIn("articleId", list)
                         .get()
                         .addOnSuccessListener { result ->
-                            bookmarkArticleAdapter.submitList(result.map { article -> article.toObject() })
+                            bookmarkArticleAdapter.submitList(result.map { article ->
+                                article.toObject()
+                            })
                         }
                         .addOnFailureListener {
                             it.printStackTrace()
                         }
-
                 }
 
             }

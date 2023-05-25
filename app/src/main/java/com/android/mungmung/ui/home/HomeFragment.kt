@@ -59,7 +59,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToArticleFragment(
                         userId = it.userId.orEmpty(),
-                        articleId = it.articleId.orEmpty()
+                        articleId = it.articleId.orEmpty(),
+                        abandoned = "n"
                     )
                 )
             },

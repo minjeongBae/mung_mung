@@ -43,9 +43,15 @@ class ArticleFragment: Fragment(R.layout.fragment_article) {
         auth = Firebase.auth
 
         binding.toolBar.setupWithNavController(findNavController())
-        binding.toolBar.title = userId
-        Log.d("toolBar",binding.toolBar.title.toString())
-        Log.d("args",args.toString())
+
+        binding.toolBar.setOnClickListener {
+            // 다른 사용자 페이지 보여주기
+            findNavController().navigate(
+                ArticleFragmentDirections.actionArticleProfileToOtherUserFragment(
+                    userId = userId.orEmpty()
+                )
+            )
+        }
 
 
         articleRef.document(articleId)

@@ -35,6 +35,9 @@
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_addArticleFragment_to_otherUserFragment"
+            app:destination="@id/otherUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -89,6 +92,10 @@
         <argument
             android:name="articleId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_articleProfile_to_otherUserFragment"
+            app:destination="@id/otherUserFragment" >
+        </action>
     </fragment>
     <fragment
         android:id="@+id/changeProfile"
@@ -99,6 +106,21 @@
             android:id="@+id/action_changeProfile_to_profileFragment"
             app:destination="@id/profileFragment" >
         </action>
+    </fragment>
+    <fragment
+        android:id="@+id/otherUserFragment"
+        android:name="com.android.mungmung.ui.OtherUserFragment"
+        android:label="fragment_other_user"
+        tools:layout="@layout/fragment_other_user" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_otherUser_to_articleFragment"
+            app:destination="@id/articleFragment" >
+        </action>
+
     </fragment>
 
 

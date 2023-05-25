@@ -60,4 +60,6 @@
     <string name="delete_account">Delete account</string>
     <string name="add_image_textview">올리기</string>
     <string name="desc_max_length">최대 20자까지 입력 가능합니다.</string>
+
+    <string name="follow">팔로우하기</string>
 </resources>

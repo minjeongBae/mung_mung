@@ -1,7 +1,6 @@
 package com.android.mungmung.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -24,11 +23,10 @@ class PhotoFragment : Fragment(R.layout.fragment_photo) {
 
         abandonedAdapter = AbandonedAdapter {
 
-            Log.d(it.articleId,it.userId.toString())
-
             findNavController().navigate(
                 PhotoFragmentDirections.actionPhotoFragmentToArticleFragment(
-                    it.userId.orEmpty(),it.articleId.orEmpty(),
+                    it.userId.orEmpty(),
+                    it.articleId.orEmpty(),
                     abandoned = "y"
                 )
             )
